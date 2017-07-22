@@ -1,0 +1,12 @@
+{
+	"Telegram": {
+		"language": "",
+		"ignore": [],
+		"TOKEN": "",
+		"admin": []
+	},
+	"ASF": {
+		"host": "",
+		"port": ""
+	}
+}
