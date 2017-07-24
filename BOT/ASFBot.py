@@ -158,7 +158,7 @@ def auth(message):
 	bot_name = message.text.split()[1]
 	reply = asf('2fa %s'%bot_name)
 	if 'Token' in reply:
-		bot.reply_to(message=message, text='*%s*'%reply.split()[2], parse_mode="MARKDOWN")
+		bot.reply_to(message=message, text='*%s*'%reply.split()[3], parse_mode="MARKDOWN")
 	elif 'find' in reply:
 		bot.reply_to(message=message, text=strings['12']%bot_name, parse_mode="MARKDOWN")
 	else:
@@ -208,6 +208,14 @@ def resume(message):
 	reply = re.sub('[<>]', '*',asf('resume %s'%bot_name)).strip()
 	bot.reply_to(message=message, text=reply, parse_mode="MARKDOWN")
 
+@bot.message_handler(func= lambda m: m.text[:4] == '!own' and is_admin(m.from_user.id))
+def resume(message):
+	cmd = message.text.split()[0]
+	bot_name = message.text.split()[1]
+	appID = message.text.split()[2]
+	reply = re.sub('[<>]', '*',asf('owns %s %s'%(bot_name, appID))).strip()
+	bot.reply_to(message=message, text=reply, parse_mode="MARKDOWN")
+	
 @bot.message_handler(func=lambda m: not is_admin(m.from_user.id))
 def unknown(message):
 	if not str(message.from_user.id) in config['Telegram']['ignore']:
