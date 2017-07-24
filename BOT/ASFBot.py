@@ -1,14 +1,23 @@
 #!/.ASFBot/bin/python
 # -*- coding: utf-8 -*-
-import telebot	 #Library for telegram
-import requests	#Library for making requests to ASF
-import json	    #Library for parsing json documents
-import logging	 #Library for logs
-import re		#Regular expresions
-from telebot import types #For accessing the types more easyly
-from urllib.parse import quote  #To encode Text as URL
-from urllib.request import urlopen
-from datetime import datetime
+try:
+	import sys
+	import telebot	 #Library for telegram
+	import requests	#Library for making requests to ASF
+	import json	    #Library for parsing json documents
+	import logging	 #Library for logs
+	import re		#Regular expresions
+	from telebot import types #For accessing the types more easyly
+	from urllib.parse import quote  #To encode Text as URL
+	from urllib.request import urlopen
+	from datetime import datetime
+except Exception as e:
+	if '3.5' > sys.version[:3]:
+		print("You need at least Python 3.5 and you are using %s,  please  upgrade"%sys.version[:3])
+	else:
+		print(e)
+		print("Did you install the necessary libraries in requirements.txt?")
+	sys.exit()
 
 logger = telebot.logger
 telebot.logger.setLevel(logging.INFO)
