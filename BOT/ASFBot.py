@@ -142,7 +142,7 @@ def loot(message):
 @bot.message_handler(commands=['farm'], func= lambda m: is_admin(m.from_user.id))
 def farm(message):
 	try:
-		bot.send_message(message.chat.id, srings["10"], parse_mode='MARKDOWN')
+		bot.send_message(message.chat.id, strings["10"], parse_mode='MARKDOWN')
 		status = asf('farm ASF')
 		bot.edit_message_text(text=strings['11'], chat_id=message.chat.id, message_id=msg.message_id, parse_mode="MARKDOWN")
 	except Exception as e:
