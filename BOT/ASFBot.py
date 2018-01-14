@@ -19,10 +19,11 @@ except Exception as e:
 
 logger = telebot.logger
 telebot.logger.setLevel(logging.INFO)
-asf = asf.Asf('192.168.1.10', '1242')
 try:
+    config = json.load(open('config.json', 'r'))
     strings = json.load(open('strings.json', 'r'))['es-ES']
-    bot = telebot.TeleBot(token='401657535:AAF-KAo5_jgajoc0c0dz9Lb1-yMuyEaiN0E',skip_pending=True)
+    asf = asf.Asf(config['ASF']['host'], config['ASF']['port'])
+    bot = telebot.TeleBot(config['Telegram']['TOKEN'],skip_pending=True)
 except Exception as e:
     logger.error(e)
     sys.exit()
