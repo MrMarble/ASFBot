@@ -21,7 +21,7 @@ logger = telebot.logger
 telebot.logger.setLevel(logging.INFO)
 try:
     config = json.load(open('config.json', 'r'))
-    strings = json.load(open('strings.json', 'r'))['es-ES']
+    strings = json.load(open('strings.json',mode='r',encoding="utf-8"))['es-ES']
     asf = asf.Asf(config['ASF']['host'], config['ASF']['port'])
     bot = telebot.TeleBot(config['Telegram']['TOKEN'],skip_pending=True)
 except Exception as e:
