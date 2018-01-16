@@ -20,7 +20,8 @@
 		},
 		"2FA":{
 			"select": "Por favor selecciona un bot",
-			"code": "🤖 <b>%s 2FA:</b>\n <code>%s</code>"
+			"code": "🤖 <b>%s 2FA:</b>\n <code>%s</code>",
+			"error": "Parece que <b>%s</b> no tiene 2FA configurado :("
 		}
 	}
 }

@@ -131,6 +131,7 @@ def query_FA(q):
         bot.reply_to(q.message, strings['2FA']['code']%(asf_bot, asf_code),parse_mode='HTML')
     except Exception as e:
         logger.error('2FA: %s'%e)
+        bot.reply_to(q.message, strings['2FA']['error']%asf_bot, parse_mode='HTML')
 
 
 @bot.message_handler(func=lambda m: True)
