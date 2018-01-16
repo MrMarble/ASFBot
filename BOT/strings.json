@@ -25,7 +25,10 @@
 		},
 		"2FAOK": {
 			"message": "Por favor selecciona un bot",
-			"reply" : "🤖 <b>%s:</b>\n<i>%s</i>"
+			"reply": "🤖 <b>%s:</b>\n<i>%s</i>"
+		},
+		"addlicense": {
+			"message" : "Escriba la licencia a agregar"
 		}
 	}
 }

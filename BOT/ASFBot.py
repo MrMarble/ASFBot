@@ -37,7 +37,7 @@ def main():
 
 def commands_keyboard():
     keyboard = types.ReplyKeyboardMarkup()
-    keyboard.add(types.KeyboardButton('list'), types.KeyboardButton('bots'), types.KeyboardButton('status'), types.KeyboardButton('!2fa'),  types.KeyboardButton('!2faok'), types.KeyboardButton('!2fano'))
+    keyboard.add(types.KeyboardButton('list'), types.KeyboardButton('bots'), types.KeyboardButton('status'), types.KeyboardButton('!2fa'),  types.KeyboardButton('!2faok'), types.KeyboardButton('!2fano'), types.KeyboardButton('!addlicense'))
     return keyboard
 
 @bot.message_handler(commands=['start'])
@@ -188,10 +188,29 @@ def query_FANO(q):
         logger.error('2FA-NO: %s'%e)
         bot.reply_to(q.message, strings['2FAOK']['reply']%(asf_bot, asf_ans),parse_mode='HTML')
 
+@bot.message_handler(func= lambda m: m.text == '!addlicense')
+def command_addlic(msg):
+    try:
+        bot.send_message(msg.chat.id,strings['addlicense']['message'], reply_markup=types.ForceReply())
+    except Exception as e:
+        logger.error('addlicense: %s'%e)
+
+def addlicense(id, license):
+    if re.match(r"^\d+$", license):
+        asf_license = asf.send_command('addlicense ASF %s'%license)
+        reply = re.sub(r"<(.*)>(.*)",r"<b>\1</b> \2",asf_license)
+        logger.info(reply)
+        bot.send_message(id, reply, parse_mode='HTML')
+
+
 @bot.message_handler(func=lambda m: True)
 def message(msg):
-    asf_command = asf.send_command(msg.text)
-    bot.send_message(msg.chat.id,asf_command)
+    if msg.reply_to_message:
+        if strings['addlicense']['message'] == msg.reply_to_message.text:
+            addlicense(msg.chat.id, msg.text)
+    else:        
+        asf_command = asf.send_command(msg.text)
+        bot.send_message(msg.chat.id,asf_command)
 
 if __name__ == '__main__':
     main()
