@@ -9,19 +9,23 @@
 			"nobot": "👽 <b>%s</b>  (<code>%s</code>)",
 			"disabled": "☠️ <b>%s</b>  (<code>disabled</code>)"
 		},
-		"bots":{
-			"nogames" : "No hay juegos para farmear!",
-			"onegame" :"<i>%s</i> 🎰 %s cromos restantes",
-			"games" : "Farmeando %d juegos!",
+		"bots": {
+			"nogames": "No hay juegos para farmear!",
+			"onegame": "<i>%s</i> 🎰 %s cromos restantes",
+			"games": "Farmeando %d juegos!",
 			"message": "🤖 <b>%s</b>\n🕹%s\n🎟️%s cromos pendientes"
 		},
-		"status":{
+		"status": {
 			"message": "🤖 <b>%s/%s</b> Bots farmeando\n🕹 %s juegos\n🎟️ %s cromos restantes"
 		},
-		"2FA":{
+		"2FA": {
 			"select": "Por favor selecciona un bot",
 			"code": "🤖 <b>%s 2FA:</b>\n <code>%s</code>",
 			"error": "Parece que <b>%s</b> no tiene 2FA configurado :("
+		},
+		"2FAOK": {
+			"message": "Por favor selecciona un bot",
+			"reply" : "🤖 <b>%s:</b>\n<i>%s</i>"
 		}
 	}
 }

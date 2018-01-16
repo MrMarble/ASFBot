@@ -37,7 +37,7 @@ def main():
 
 def commands_keyboard():
     keyboard = types.ReplyKeyboardMarkup()
-    keyboard.add(types.KeyboardButton('list'), types.KeyboardButton('bots'), types.KeyboardButton('status'), types.KeyboardButton('2FA'))
+    keyboard.add(types.KeyboardButton('list'), types.KeyboardButton('bots'), types.KeyboardButton('status'), types.KeyboardButton('!2fa'),  types.KeyboardButton('!2faok'), types.KeyboardButton('!2fano'))
     return keyboard
 
 @bot.message_handler(commands=['start'])
@@ -109,30 +109,84 @@ def command_status(msg):
     except Exception as e:
         logger.error('/status: %s'%e)
 
-@bot.message_handler(func=lambda m: m.text == '2FA')
+@bot.message_handler(func=lambda m: m.text == '!2fa')
 def command_FA(msg):
     try:
         asf_bots = asf.get_bot('ASF')
         keyboard = types.InlineKeyboardMarkup(row_width=3)
         buttons = []
         for bot_instance  in asf_bots:
-            buttons.append(types.InlineKeyboardButton(bot_instance['BotName'], callback_data='2FA %s'%bot_instance['BotName']))
+            buttons.append(types.InlineKeyboardButton(bot_instance['BotName'], callback_data='!2fa %s'%bot_instance['BotName']))
         keyboard.add(*buttons)
         bot.send_message(msg.chat.id, strings['2FA']['select'], reply_markup=keyboard)
     except Exception as e:
         logger.error('2FA: %s'%e)
 
-@bot.callback_query_handler(lambda q: '2FA' in q.data)
+@bot.callback_query_handler(lambda q: '!2fa ' in q.data)
 def query_FA(q):
     try:
         asf_FA = asf.send_command('2fa %s'%q.data[3:])
         asf_bot = re.search(r"<(.*)>", asf_FA).group(1)
         asf_code = re.search(r" [A-Z0-9]{4,6}$", asf_FA).group(0).lstrip()
-        bot.reply_to(q.message, strings['2FA']['code']%(asf_bot, asf_code),parse_mode='HTML')
+        bot.answer_callback_query(q.id)
+        bot.reply_to(q.message, strings['2FA']['code']%(asf_bot, asf_code),parse_mode='HTML', reply_markup=commands_keyboard())
     except Exception as e:
         logger.error('2FA: %s'%e)
         bot.reply_to(q.message, strings['2FA']['error']%asf_bot, parse_mode='HTML')
 
+@bot.message_handler(func=lambda m: m.text == '!2faok')
+def command_FAOK(msg):
+    try:
+        asf_bots = asf.get_bot('ASF')
+        keyboard = types.InlineKeyboardMarkup(row_width=3)
+        buttons = []
+        for bot_instance  in asf_bots:
+            buttons.append(types.InlineKeyboardButton(bot_instance['BotName'], callback_data='!2faok %s'%bot_instance['BotName']))
+        keyboard.add(*buttons)
+        bot.send_message(msg.chat.id, strings['2FAOK']['message'], reply_markup=keyboard)
+
+    except Exception as e:
+        logger.error('2FA-OK: %s'%e)
+
+@bot.callback_query_handler(lambda q: '!2faok ' in q.data)
+def query_FAOK(q):
+    try:
+        asf_FA = asf.send_command('2faok %s'%q.data[5:])
+        asf_bot = re.search(r"<(.*)>", asf_FA).group(1)
+        asf_ans = re.search(r">(.*)", asf_FA).group(1).lstrip()
+        logger.info(asf_FA)
+        bot.answer_callback_query(q.id)
+        bot.reply_to(q.message, strings['2FAOK']['reply']%(asf_bot, asf_ans),parse_mode='HTML', reply_markup=commands_keyboard())
+    except Exception as e:
+        logger.error('2FA-OK: %s'%e)
+        bot.reply_to(q.message, strings['2FAOK']['reply']%(asf_bot, asf_ans),parse_mode='HTML')
+
+@bot.message_handler(func=lambda m: m.text == '!2fano')
+def command_FANO(msg):
+    try:
+        asf_bots = asf.get_bot('ASF')
+        keyboard = types.InlineKeyboardMarkup(row_width=3)
+        buttons = []
+        for bot_instance  in asf_bots:
+            buttons.append(types.InlineKeyboardButton(bot_instance['BotName'], callback_data='!2fano %s'%bot_instance['BotName']))
+        keyboard.add(*buttons)
+        bot.send_message(msg.chat.id, strings['2FAOK']['message'], reply_markup=keyboard)
+
+    except Exception as e:
+        logger.error('2FA-OK: %s'%e)
+
+@bot.callback_query_handler(lambda q: '!2fano ' in q.data)
+def query_FANO(q):
+    try:
+        asf_FA = asf.send_command('2fano %s'%q.data[5:])
+        asf_bot = re.search(r"<(.*)>", asf_FA).group(1)
+        asf_ans = re.search(r">(.*)", asf_FA).group(1).lstrip()
+        logger.info(asf_FA)
+        bot.answer_callback_query(q.id)
+        bot.reply_to(q.message, strings['2FAOK']['reply']%(asf_bot, asf_ans),parse_mode='HTML', reply_markup=commands_keyboard())
+    except Exception as e:
+        logger.error('2FA-NO: %s'%e)
+        bot.reply_to(q.message, strings['2FAOK']['reply']%(asf_bot, asf_ans),parse_mode='HTML')
 
 @bot.message_handler(func=lambda m: True)
 def message(msg):
