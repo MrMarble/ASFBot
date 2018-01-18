@@ -1,7 +1,7 @@
 {
 	"es-ES": {
 		"start": {
-			"admins": "<b>ASFBot</b>\nTelegram bot para controlar y administrar <a href=\"https://github.com/JustArchi/ArchiSteamFarm\">Archi Steam Farm</a>\nPara ver la lista de comandos utiliza /help"
+			"admins": "<b>ASFBot</b>\nTelegram bot para controlar y administrar <a href=\"https://github.com/JustArchi/ArchiSteamFarm\">Archi Steam Farm</a>"
 		},
 		"list": {
 			"isbot": "🤖 <b>%s</b>  (<code>%s</code>)",
