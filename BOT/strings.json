@@ -1,7 +1,6 @@
 {
 	"es-ES": {
 		"start": {
-			"noadmins": "<b>ASFBot</b>\nTelegram bot para controlar y administrar <a href=\"https://github.com/JustArchi/ArchiSteamFarm\">Archi Steam Farm</a>\nPara ver la lista de comandos utiliza /help\n<b>ATENCION!</b>\nNo hay administradores configuados, cualquiera puede acceder a este bot, introduce la siguiente ID: <b>%s</b>",
 			"admins": "<b>ASFBot</b>\nTelegram bot para controlar y administrar <a href=\"https://github.com/JustArchi/ArchiSteamFarm\">Archi Steam Farm</a>\nPara ver la lista de comandos utiliza /help"
 		},
 		"list": {
@@ -29,6 +28,37 @@
 		},
 		"addlicense": {
 			"message" : "Escriba la licencia a agregar"
+		}
+	},
+	"en-US": {
+		"start": {
+			"admins": "<b>ASFBot</b>\nTelegram bot for <a href=\"https://github.com/JustArchi/ArchiSteamFarm\">Archi Steam Farm</a>\nTo get more info use /help"
+		},
+		"list": {
+			"isbot": "🤖 <b>%s</b>  (<code>%s</code>)",
+			"nobot": "👽 <b>%s</b>  (<code>%s</code>)",
+			"disabled": "☠️ <b>%s</b>  (<code>disabled</code>)"
+		},
+		"bots": {
+			"nogames": "There aren't any games left to farm!",
+			"onegame": "<i>%s</i> 🎰 %s cards left",
+			"games": "Farming %d games!",
+			"message": "🤖 <b>%s</b>\n🕹%s\n🎟️%s cards left"
+		},
+		"status": {
+			"message": "🤖 <b>%s/%s</b> Bots farming\n🕹 %s games\n🎟️ %s cards left"
+		},
+		"2FA": {
+			"select": "Please select a Bot",
+			"code": "🤖 <b>%s 2FA:</b>\n <code>%s</code>",
+			"error": "It seems that <b>%s</b> doesn't have 2FA configured yet :("
+		},
+		"2FAOK": {
+			"message": "Please select a bot",
+			"reply": "🤖 <b>%s:</b>\n<i>%s</i>"
+		},
+		"addlicense": {
+			"message" : "Please type the license you want to activate:"
 		}
 	}
 }
